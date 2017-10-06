@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8">
+		<title>Shuffler</title>
+		<meta name="author" content="Luis Castro Martín">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+
+	<body>
+		<p>Shuffler</p>
+		<input type="file" onchange="readFile(this)" onclick="this.value = null" style="width: 100%" autofocus>
+		<br><br>
+		<ul id="shuffled"></ul>
+		<script>
+			"use strict";
+			var shuffled = document.getElementById("shuffled");
+			
+			function shuffle(array) {
+				for (let i = array.length; i > 0; i--) {
+					let j = Math.floor(Math.random() * i);
+					[array[i - 1], array[j]] = [array[j], array[i - 1]];
+				}
+				
+				return array;
+			}
+			
+			function readFile(filePath) {
+				var reader = new FileReader();
+				
+				reader.onload = function(event) {
+					shuffled.innerHTML = '';
+				
+					for (let item of shuffle(event.target.result.split(/[\r\n]+/))) {
+						if (item) {
+							let li = document.createElement("li");
+							li.textContent = item;
+							shuffled.appendChild(li);
+						}
+					}
+				}
+					
+				reader.readAsText(filePath.files[0]);
+			}
+		</script>
+	</body>
+</html>
