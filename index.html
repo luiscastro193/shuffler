@@ -33,9 +33,11 @@
 					shuffled.innerHTML = '';
 				
 					for (let item of shuffle(event.target.result.split(/[\r\n]+/))) {
-						if (item) {
+						let trimmed = item.trim();
+						
+						if (trimmed) {
 							let li = document.createElement("li");
-							li.textContent = item;
+							li.textContent = trimmed;
 							shuffled.appendChild(li);
 						}
 					}
