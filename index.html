@@ -32,7 +32,7 @@
 				reader.onload = function(event) {
 					shuffled.innerHTML = '';
 				
-					for (let item of shuffle(event.target.result.split(/[\r\n]+/))) {
+					for (let item of shuffle(event.target.result.split(/[\n\r]+/))) {
 						item = item.trim();
 						
 						if (item) {
