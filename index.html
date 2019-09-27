@@ -37,21 +37,21 @@
 				return array;
 			}
 			
+			function toItem(string) {
+				let li = document.createElement("li");
+				li.textContent = string;
+				return li;
+			}
+
+			
 			function readFile(filePath) {
 				var reader = new FileReader();
 				
 				reader.onload = function(event) {
 					shuffled.innerHTML = '';
-				
-					for (let item of shuffle(event.target.result.split(/[\n\r]+/))) {
-						item = item.trim();
-						
-						if (item) {
-							let li = document.createElement("li");
-							li.textContent = item;
-							shuffled.appendChild(li);
-						}
-					}
+					shuffled.append(
+						...shuffle(event.target.result.split(/[\n\r]+/)).map(item => item.trim()).filter(item => item).map(toItem)
+					);
 				}
 					
 				reader.readAsText(filePath.files[0]);
