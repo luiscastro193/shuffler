@@ -26,7 +26,7 @@
 		<ul id="shuffled"></ul>
 		<script>
 			"use strict";
-			var shuffled = document.getElementById("shuffled");
+			let shuffled = document.getElementById("shuffled");
 			
 			function shuffle(array) {
 				for (let i = array.length - 1; i > 0; i--) {
@@ -45,7 +45,7 @@
 
 			
 			function readFile(filePath) {
-				var reader = new FileReader();
+				let reader = new FileReader();
 				
 				reader.onload = function(event) {
 					shuffled.innerHTML = '';
