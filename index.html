@@ -50,7 +50,7 @@
 				reader.onload = function(event) {
 					shuffled.innerHTML = '';
 					shuffled.append(
-						...shuffle(event.target.result.split(/[\n\r]+/).filter(item => item.trim())).map(toItem)
+						...shuffle(event.target.result.split(/\n+/).filter(item => item.trim())).map(toItem)
 					);
 				}
 					
