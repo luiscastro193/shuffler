@@ -26,12 +26,13 @@
 
 	<body>
 		<p>Shuffler</p>
-		<input name="file" type="file" onchange="readFile(this)" onclick="this.value = null" style="width: 100%" autofocus>
+		<input name="file" type="file" onclick="this.value = null" style="width: 100%" autofocus>
 		<br><br>
-		<ul id="shuffled"></ul>
+		<ul></ul>
 		<script>
 			"use strict";
-			let shuffled = document.getElementById("shuffled");
+			const input = document.querySelector('input');
+			const shuffled = document.querySelector('ul');
 			
 			function shuffle(array) {
 				for (let i = array.length - 1; i > 0; i--) {
@@ -47,19 +48,16 @@
 				li.textContent = string;
 				return li;
 			}
-
 			
-			function readFile(filePath) {
+			input.onchange = function() {
 				let reader = new FileReader();
-				
-				reader.onload = function(event) {
+				reader.onload = () => {
 					shuffled.innerHTML = '';
 					shuffled.append(
 						...shuffle(event.target.result.trim().split(/\s+^\s*/m)).map(toItem)
 					);
 				}
-					
-				reader.readAsText(filePath.files[0]);
+				reader.readAsText(input.files[0]);
 			}
 		</script>
 	</body>
