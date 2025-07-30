@@ -17,15 +17,10 @@ function toItem(string) {
 	return li;
 }
 
-input.onchange = function() {
-	let reader = new FileReader();
-	reader.onload = () => {
-		shuffled.innerHTML = '';
-		shuffled.append(
-			...shuffle(event.target.result.trim().split(/\s+^\s*/m)).map(toItem)
-		);
-	}
-	reader.readAsText(input.files[0]);
-}
+input.onchange = async () => {
+	let text = await input.files[0].text();
+	shuffled.innerHTML = '';
+	shuffled.append(...shuffle(text.trim().split(/\s+^\s*/m)).map(toItem));
+};
 
 if (input.value) input.onchange();
